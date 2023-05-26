@@ -1,0 +1,112 @@
+﻿@model IEnumerable<Book>
+@{
+    ViewData["Title"] = "List of books";
+    string image(Book books)
+    {
+        if (books.BookPictureURL != "" && books.BookPictureURL != null)
+        {
+            return "fa-solid fa-check";
+        }
+        else
+        {
+            return "fa-solid fa-x";
+        }
+    }
+}
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <p>
+            <div class="text-center">
+                <a asp-action="Create" class="btn btn-primary"><i class="fa-sharp fa-solid fa-book"></i>Add book</a>
+            </div>
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Title)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Authors)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Description)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Publisher)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ISBN)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DatePublished)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.saleInfo)
+                    </th>
+                    <th>
+                        Has image
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <div class="title">
+                                @Html.DisplayFor(modelItem=>item.Title)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="author">
+                                @Html.DisplayFor(modelItem=>item.Authors)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="description">
+                                @Html.DisplayFor(modelItem=>item.Description)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="publisher">
+                                @Html.DisplayFor(modelItem=>item.Publisher)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="isbn">
+                                @Html.DisplayFor(modelItem=>item.ISBN)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="datepublished">
+                                @Html.DisplayFor(modelItem=>item.DatePublished)
+                            </div> 
+                        </td>
+                        <td>
+                            <div class="price">
+                                @Html.DisplayFor(modelItem=>item.saleInfo)
+                            </div>
+                           
+                        </td>
+                        <td>
+                            <div class="image">
+                                <i class="@image(item)"></i>
+                            </div>
+                          
+                        </td>
+                        <td>
+                            <div class="btn-group">
+                                <a href="@Url.Action("Edit", new { id = item.Id })" class="btn btn-primary btn-sm edit-button"><i class="fa-solid fa-pen-to-square"></i>Edit</a>
+                                <a href="@Url.Action("Details", new { id = item.Id })" class="btn btn-success btn-sm"><i class="fa-solid fa-circle-info"></i>Details</a>
+                                <a href="@Url.Action("Delete", new { id = item.Id })" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash-can"></i>Delete</a>
+                            </div>
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>
