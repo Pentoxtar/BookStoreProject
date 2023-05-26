@@ -1,100 +1,37 @@
-﻿using BookstoreProject.Services;
-using Microsoft.AspNetCore.Http;
+﻿using BookstoreProject.Models;
+using BookstoreProject.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookstoreProject.Controllers
 {
     public class BooksController : Controller
     {
-		// GET: BooksController
-
-		//private readonly BooksService _booksService;
-
-		//public BooksController(BooksService booksService)
-		//{
-		//	_booksService = booksService;
-		//}
-
-		//public async Task<IActionResult> Index2()
-		//{
-		//	// Извикване на метода GetBooksFromGoogleBooksAPI от сервиза
-		//	var books = await _booksService.GetBooksFromGoogleBooksAPI();
-
-		//	return View(books);
-		//}
-		public ActionResult Index()
+        private readonly IBooksService _booksService;
+        public BooksController(IBooksService service)
+        { 
+            _booksService = service;
+        }
+        public async Task<IActionResult> Index()
         {
-            return View();
+            List<Book> books = await _booksService.GetBooksFromGoogleBooksAPI();
+            return View(books);
         }
         
-        
-        // GET: BooksController/Details/5
-        public ActionResult Details(int id)
+        public IActionResult Create()
         {
             return View();
         }
-
-        // GET: BooksController/Create
-        public ActionResult Create()
+        public IActionResult Delete()
         {
             return View();
         }
-
-        // POST: BooksController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: BooksController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<IActionResult> Edit()
         {
             return View();
         }
-
-        // POST: BooksController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: BooksController/Delete/5
-        public ActionResult Delete(int id)
+        public IActionResult Details()
         {
             return View();
-        }
-
-        // POST: BooksController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
         }
     }
 }
