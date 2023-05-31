@@ -7,6 +7,8 @@ namespace BookstoreProject.Controllers
     public class BooksController : Controller
     {
         private readonly IBooksService _booksService;
+
+
         public BooksController(IBooksService service)
         { 
             _booksService = service;
@@ -21,17 +23,39 @@ namespace BookstoreProject.Controllers
         {
             return View();
         }
-        public IActionResult Delete()
+		public async Task<IActionResult> Delete(string id)
+		{
+			List<Book> books = await _booksService.GetBooksFromGoogleBooksAPI();
+			Book book = books.FirstOrDefault(b => b.Id == id);
+			if (book == null)
+			{
+				return NotFound();
+			}
+
+			return View(book);
+		}
+		public async Task<IActionResult> Edit(string id)
+		{
+			List<Book> books = await _booksService.GetBooksFromGoogleBooksAPI();
+			Book book = books.FirstOrDefault(b => b.Id == id);
+			if (book == null)
+			{
+				return NotFound();
+			}
+
+			return View(book);
+		}
+		public async Task<IActionResult> Details(string id)
         {
-            return View();
+            List<Book> books = await _booksService.GetBooksFromGoogleBooksAPI();
+            Book book = books.FirstOrDefault(b => b.Id == id);
+            if (book == null)
+            {
+                return NotFound();
+            }
+
+            return View(book);
         }
-        public async Task<IActionResult> Edit()
-        {
-            return View();
-        }
-        public IActionResult Details()
-        {
-            return View();
-        }
+        
     }
 }

@@ -1,83 +1,32 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using BookstoreProject.Models;
+using BookstoreProject.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookstoreProject.Controllers
 {
     public class StoreController : Controller
     {
-        // GET: StoreController
-        public ActionResult Index()
+        private readonly IBooksService _booksService;
+        public StoreController(IBooksService service)
         {
-            return View();
+            _booksService = service;
         }
+        public async Task<IActionResult> Index()
+        {
+            List<Book> books = await _booksService.GetBooksFromGoogleBooksAPI();
+            return View(books);
+        }
+		public async Task<IActionResult> Details(string id)
+		{
+			List<Book> books = await _booksService.GetBooksFromGoogleBooksAPI();
+			Book book = books.FirstOrDefault(b => b.Id == id);
+			if (book == null)
+			{
+				return NotFound();
+			}
 
-        // GET: StoreController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
+			return View(book);
+		}
 
-        // GET: StoreController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: StoreController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: StoreController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: StoreController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: StoreController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: StoreController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-    }
+	}
 }
