@@ -1,7 +1,6 @@
 html {
   font-size: 14px;
 }
-
 @media (min-width: 768px) {
   html {
     font-size: 16px;
@@ -18,5 +17,38 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background-color: #ECECEC;
+}
+.description {
+    max-height: 3em;
+    overflow: hidden; 
+    text-overflow: ellipsis;
+    white-space: normal; 
+}
+.title,
+.author,
+.publisher,
+.isbn,
+.datepublished,
+.price {
+    max-width: 150px; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    white-space: nowrap; 
+}
+.btn-group {
+    display: flex;
+}
+
+    .btn-group .btn {
+        flex: 1;
+    }
+.edit-button {
+    width: auto;
+  
+}
+.table-container {
+    display: flex;
+    justify-content: center;
 }
