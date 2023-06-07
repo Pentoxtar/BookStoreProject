@@ -6,6 +6,7 @@
         public string id { get; set; }
         public string etag { get; set; }
         public string selfLink { get; set; }
-        public VolumeInfo volumeInfo { get; set; }
+
+        public VolumeInfo volumeInfo { get; set; } 
     }
 }

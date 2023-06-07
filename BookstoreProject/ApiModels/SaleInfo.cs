@@ -1,8 +1,8 @@
 ﻿namespace BookstoreProject.ApiModels
 {
-	public class SaleInfo
+	public class SaleInfo:RetailPrice
 	{
-		public RetailPrice retailPrice { get; set; }
+		public RetailPrice? retailPrice { get; set; }
 
 	}
 }
