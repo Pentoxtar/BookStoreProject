@@ -31,9 +31,9 @@
 				<span asp-validation-for="Publisher" class="text-danger"></span>
 			</div>
 			<div class="form-group">
-				<label asp-for="ISBN" class="control-label"></label>
-				<input asp-for="ISBN" class="form-control" />
-				<span asp-validation-for="ISBN" class="text-danger"></span>
+				<label asp-for="industryIdentifiers" class="control-label"></label>
+				<input asp-for="industryIdentifiers" class="form-control" />
+				<span asp-validation-for="industryIdentifiers" class="text-danger"></span>
 			</div>
 			<div class="form-group">
 				<label asp-for="DatePublished" class="control-label"></label>
@@ -41,23 +41,22 @@
 				<span asp-validation-for="DatePublished" class="text-danger"></span>
 			</div>
 			<div class="form-group">
-				<label asp-for="saleInfo" class="control-label"></label>
-				<input asp-for="saleInfo" class="form-control" />
-				<span asp-validation-for="saleInfo" class="text-danger"></span>
+				<label asp-for="SaleInfo" class="control-label"></label>
+				<input asp-for="SaleInfo" class="form-control" />
+				<span asp-validation-for="SaleInfo" class="text-danger"></span>
 			</div>
 			<div class="form-group">
-				<label asp-for="BookPictureURL" class="control-label"></label>
-				<input asp-for="BookPictureURL" class="form-control" />
-				<span asp-validation-for="BookPictureURL" class="text-danger"></span>
+				<label asp-for="imageLinks" class="control-label"></label>
+				<input asp-for="imageLinks" class="form-control" />
+				<span asp-validation-for="imageLinks" class="text-danger"></span>
 			</div>
+			<br>
 			<div>
 				<div class="form-group">
 					<input type="submit" value="Create" class="btn btn-primary" />
+					<a asp-action="Index" class="btn btn-warning"><i class="fa-sharp fa-solid fa-arrow-left"></i>Back</a>
 				</div>
 			</div>
 	</form>
 </div>
-</div>
-<div>
-	<a asp-action="Index" class="btn btn-warning"><i class="fa-sharp fa-solid fa-arrow-left"></i>Back</a>
 </div>

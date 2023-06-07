@@ -3,7 +3,7 @@
     ViewData["Title"] = "List of books";
     string image(Book books)
     {
-        if (books.BookPictureURL != "" && books.BookPictureURL != null)
+        if (books.imageLinks != null)
         {
             return "fa-solid fa-check";
         }
@@ -20,6 +20,7 @@
                 <a asp-action="Create" class="btn btn-primary"><i class="fa-sharp fa-solid fa-book"></i>Add book</a>
             </div>
         </p>
+        <div class="table-container">
         <table class="table">
             <thead>
                 <tr>
@@ -36,13 +37,13 @@
                         @Html.DisplayNameFor(model => model.Publisher)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.ISBN)
+                        @Html.DisplayNameFor(model => model.industryIdentifiers)
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.DatePublished)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.saleInfo)
+                        @Html.DisplayNameFor(model => model.Price)
                     </th>
                     <th>
                         Has image
@@ -75,7 +76,7 @@
                         </td>
                         <td>
                             <div class="isbn">
-                                @Html.DisplayFor(modelItem=>item.ISBN)
+                                @Html.DisplayFor(modelItem=>item.industryIdentifiers)
                             </div>
                         </td>
                         <td>
@@ -83,12 +84,7 @@
                                 @Html.DisplayFor(modelItem=>item.DatePublished)
                             </div> 
                         </td>
-                        <td>
-                            <div class="price">
-                                @Html.DisplayFor(modelItem=>item.saleInfo)
-                            </div>
-                           
-                        </td>
+                        <td>???</td>
                         <td>
                             <div class="image">
                                 <i class="@image(item)"></i>
@@ -98,7 +94,7 @@
                         <td>
                             <div class="btn-group">
                                 <a href="@Url.Action("Edit", new { id = item.Id })" class="btn btn-primary btn-sm edit-button"><i class="fa-solid fa-pen-to-square"></i>Edit</a>
-                                <a href="@Url.Action("Details", new { id = item.Id })" class="btn btn-success btn-sm"><i class="fa-solid fa-circle-info"></i>Details</a>
+                                <a class="btn btn-success btn-sm" asp-action="Details" asp-route-id="@item.Id"><i class="fa-solid fa-circle-info"></i>Details</a>
                                 <a href="@Url.Action("Delete", new { id = item.Id })" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash-can"></i>Delete</a>
                             </div>
                         </td>
@@ -107,6 +103,6 @@
                 }
             </tbody>
         </table>
-
+        </div>
     </div>
 </div>
