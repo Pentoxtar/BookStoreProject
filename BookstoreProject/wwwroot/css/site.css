@@ -15,10 +15,72 @@ html {
   position: relative;
   min-height: 100%;
 }
+.a-cleanup {
+    color: inherit;
+
+}
+
+    .a-cleanup:hover {
+        text-decoration: none;
+        color: inherit;
+       
+    }
+
+.card-img-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 17em;
+    background-color: #e8dcc4;
+}
+
+.card-img-custom {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    
+}
+
+.store-card {
+    transition: all 0.2s ease;
+}
+
+    .store-card:hover {
+        transform: scale(1.05);
+        box-shadow: lightgray 2px 5px 5px 2px;
+
+    }
+.heart-btn {
+    position: relative;
+}
+
+    .heart-btn:hover {
+        color: red;
+    }
+
+        .heart-btn:hover::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 0, 0, 0.2);
+            z-index: -1;
+            border-radius: 5px;
+        }
+
+    .heart-btn:active {
+        color:white;
+    }
+
+        .heart-btn:active::before {
+            background-color: rgba(255, 0, 0, 0.4);
+        }
 
 body {
     margin-bottom: 60px;
-    background-color: #ECECEC;
+    
 }
 .description {
     max-height: 3em;
@@ -30,13 +92,8 @@ body {
 .author,
 .publisher,
 .isbn,
-.datepublished,
-.price {
-    max-width: 150px; 
-    overflow: hidden; 
-    text-overflow: ellipsis; 
-    white-space: nowrap; 
-}
+.datepublished
+
 .btn-group {
     display: flex;
 }
@@ -52,3 +109,326 @@ body {
     display: flex;
     justify-content: center;
 }
+.password-toggle {
+    cursor: pointer;
+}
+
+    .password-toggle:hover {
+        text-decoration: underline;
+    }
+.password-toggle {
+    position: relative;
+    left: 350px;
+    cursor: pointer;
+}
+.custom-link {
+    color: #ffa33a;
+    transition: color 0.3s;
+}
+
+    .custom-link:hover {
+        color: #ff6e00;
+    }
+
+ /*Shopping cart-animation*/
+@keyframes cart-animation {
+    0% {
+        transform: rotateY(0deg);
+    }
+
+    50% {
+        transform: rotateY(180deg);
+    }
+
+    100% {
+        transform: rotateY(0deg);
+    }
+}
+.fa-cart-shopping-animation {
+    animation: cart-animation 1.5s linear;
+}
+/*Account-animation*/
+@keyframes account-animation {
+    0% {
+        transform: rotateY(0deg);
+    }
+
+    50% {
+        transform: rotateY(180deg);
+    }
+
+    100% {
+        transform: rotateY(0deg);
+    }
+}
+
+.rotate-animation {
+    animation: account-animation 1.5s infinite;
+}
+
+
+navbar-nav .nav-link:hover {
+    text-decoration: underline;
+}
+
+
+/*Footer css*/
+.footer {
+    background-color: #f0dcc4;
+    position: relative;
+    text-align: center;
+    color:black;
+    font-size:17px;
+    max-height:50px;
+}
+
+    .footer h5 {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color:black;
+    }
+
+    .footer ul li {
+        margin-bottom: 10px;
+        color:black;
+    }
+
+        .footer ul li a {
+            color: #6c757d;
+            text-decoration: none;
+            color:black;
+            font-size:17px;
+        }
+
+            .footer ul li a:hover {
+                color: #ffa33a;
+
+            }
+
+    .footer ul.list-inline li {
+        display: inline-block;
+        margin-right: 20px;
+    }
+
+        .footer ul.list-inline li a {
+            color: #6c757d;
+            text-decoration: none;
+            font-size: 20px;
+            color:black;
+        }
+
+            .footer ul.list-inline li a:hover {
+                color: #ffa33a;
+            }
+
+ /*---Pagination---*/
+.pagination {
+    display: flex;
+    justify-content: center;
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+    .pagination a {
+
+        padding: 6px 12px;
+        text-decoration: none;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        color:black;
+    }
+
+        .pagination a.active {
+            font-weight: bold;
+            background-color: #4CAF50;
+            
+        }
+
+        .pagination a:hover:not(.active) {
+            background-color:#ffc404;
+            cursor: pointer;
+        }
+
+
+
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+}
+
+.description {
+    max-height: 3em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+}
+
+.title,
+.author,
+.publisher,
+.isbn,
+.datepublished
+
+.btn-group {
+    display: flex;
+}
+
+.btn-group .btn {
+    flex: 1;
+}
+
+.edit-button {
+    width: auto;
+}
+
+.table-container {
+    display: flex;
+    justify-content: center;
+}
+
+.password-toggle {
+    cursor: pointer;
+}
+
+    .password-toggle:hover {
+        text-decoration: underline;
+    }
+
+.password-toggle {
+    position: relative;
+    left: 350px;
+    cursor: pointer;
+}
+
+.custom-link {
+    color: #ffa33a;
+    transition: color 0.3s;
+}
+
+    .custom-link:hover {
+        color: #ff6e00;
+    }
+
+/*Shopping cart-animation*/
+@keyframes cart-animation {
+    0% {
+        transform: rotateY(0deg);
+    }
+
+    50% {
+        transform: rotateY(180deg);
+    }
+
+    100% {
+        transform: rotateY(0deg);
+    }
+}
+
+.fa-cart-shopping-animation {
+    animation: cart-animation 1.5s linear;
+}
+/*Account-animation*/
+@keyframes account-animation {
+    0% {
+        transform: rotateY(0deg);
+    }
+
+    50% {
+        transform: rotateY(180deg);
+    }
+
+    100% {
+        transform: rotateY(0deg);
+    }
+}
+
+.rotate-animation {
+    animation: account-animation 1.5s infinite;
+}
+
+.a-cleanup {
+    color: inherit;
+}
+
+    .a-cleanup:hover {
+        text-decoration: none;
+        color: inherit;
+    }
+
+.card-img-custom {
+    width: auto;
+    height: 200px;
+    object-fit: cover;
+}
+
+.cardz {
+    transition: all 0.3s ease;
+    height: 400px;
+    position: relative;
+    background-color: #ECECEC;
+}
+
+    .cardz:hover {
+        transform: scale(1.04);
+    }
+
+.store-btn {
+    transition: all 0.2s ease;
+}
+
+    .store-btn:hover {
+        background-color: forestgreen;
+        border: 1px solid forestgreen;
+    }
+
+.description-container {
+    max-height: 200px;
+    overflow: hidden;
+}
+
+.card-img-top.book-image {
+    width: 150px;
+    max-height: auto;
+    object-fit: cover;
+}
+
+.card .position-relative {
+    position: relative;
+}
+
+.card .store-btn {
+    position: relative;
+    bottom: 0px;
+    left: 92%;
+    transform: translateX(-50%);
+}
+
+.navbar-nav .nav-link:hover {
+    text-decoration: underline;
+}
+
+
+
+
+
+
+
