@@ -7,12 +7,15 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/BookstoreProject.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/fontawesome/css/all.css" />
+    <link rel="stylesheet" href="~/css/myStyle.css" />
+    
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-warning border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">BookstoreProject</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Store" asp-action="Index">BookStore</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -23,9 +26,21 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Store" asp-action="Index">Store</a>
+                        </li>    
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Books" asp-action="Index">Books</a>
                         </li>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="ListAllRoles">Roles</a>
+                            </li>
+                        }  
                     </ul>
+                    <a id="cart-link" class="nav-link text-dark float-right" asp-area="" asp-controller="Cart" asp-action="Index">
+                        <i id="cart-icon" class="fa-solid fa-cart-shopping"></i>
+                    </a>
                     <partial name="_LoginPartial" />
                 </div>
             </div>
@@ -36,10 +51,40 @@
             @RenderBody()
         </main>
     </div>
-
-    <footer class="border-top footer text-muted">
+   
+    <footer class="border-bottom footer">
         <div class="container">
-            &copy; 2023 - BookstoreProject - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <h5>About Us</h5>
+                    <ul class="list-unstyled">
+                        <li><a asp-area="" asp-controller="Home" asp-action="Privacy">Our Vision</a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="Terms">Our Mission</a></li>
+                        <li><a asp-area="" asp-controller="Contact" asp-action="Index">Advices</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <h5>Open Library</h5>
+                    <ul class="list-unstyled">
+                        <li><a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy Policy</a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="Terms">Terms of Service</a></li>
+                        <li><a asp-area="" asp-controller="Contact" asp-action="Index">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h5>Follow Us</h5>
+                    <ul class="list-inline">
+                        <li class="list-inline-item"><a href="https://www.facebook.com"><i class="fab fa-facebook-f"></i></a></li>
+                        <li class="list-inline-item"><a href="https://www.twitter.com"><i class="fab fa-twitter"></i></a></li>
+                        <li class="list-inline-item"><a href="https://www.instagram.com"><i class="fab fa-instagram"></i></a></li>
+                        <li class="list-inline-item"><a href="https://www.pinterest.com"><i class="fab fa-pinterest"></i></a></li>
+                    </ul>
+                </div>
+
+            </div>
+           
+            <p class="text-center">&copy; 2023 - BookstoreProject</p>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
