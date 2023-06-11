@@ -6,6 +6,7 @@ using BookstoreProject.Models;
 using BookstoreProject.Services.Contracts;
 using BookstoreProject.ApiModels;
 using Microsoft.EntityFrameworkCore;
+using static System.Reflection.Metadata.BlobBuilder;
 
 namespace BookstoreProject.Services
 {
@@ -20,64 +21,52 @@ namespace BookstoreProject.Services
 			_httpClient = httpClient;
 		}
 
-		public async Task<List<Book>> GetBooksFromGoogleBooksAPI()
-		{
-			
-				List<VolumeInfo> volumeInfos = new List<VolumeInfo>();
-			//string apiKey = "AIzaSyCQnwVpMZ5DqKI5JuwAwJ98vj2sV7Ihivs";
-			List<Book> books = new List<Book>();
-				string apiUrl = "https://www.googleapis.com/books/v1/volumes?q=subject:science&maxResults=40";
+       public async Task<List<Book>> GetBooksFromGoogleBooksAPI()
+{
+    List<Book> books = new List<Book>();
 
-				var response = await _httpClient.GetAsync(apiUrl);
+    int maxResultsPerRequest = 20;
+    int numRequests = 5;
 
-				if (response.IsSuccessStatusCode)
-				{
-					var json = await response.Content.ReadAsStringAsync();
-					Root? result = JsonConvert.DeserializeObject<Root>(json);
-					foreach (var item in result.items)
-				{
-					VolumeInfo volumeInfo = item.volumeInfo;
-					volumeInfo.Id = item.id;
-					volumeInfos.Add(volumeInfo);
-				}
+    for (int i = 0; i < numRequests; i++)
+    {
+        int startIndex = i * maxResultsPerRequest;
 
-			}
-				foreach (var item in volumeInfos)
-				{
-				Book book = new Book()
-				{
-					Id = item.Id,
-					Title = item.title,
-					Authors = item.authors,
-					Publisher = item.publisher,
-					DatePublished = item.publishedDate,
-					Description = item.description,
-					SaleInfo = item.saleInfo,
-					industryIdentifiers = item.industryIdentifiers,
-					imageLinks = item.imageLinks,
-					};
-					books.Add(book);
-				}
+        string apiUrl = $"https://www.googleapis.com/books/v1/volumes?q=subject:science&startIndex={startIndex}&maxResults={maxResultsPerRequest}";
 
+        var response = await _httpClient.GetAsync(apiUrl);
 
-			
-            return books;
+        if (response.IsSuccessStatusCode)
+        {
+            var json = await response.Content.ReadAsStringAsync();
+            Root? result = JsonConvert.DeserializeObject<Root>(json);
+
+            if (result != null && result.items != null)
+            {
+                foreach (var item in result.items)
+                {
+                    VolumeInfo volumeInfo = item.volumeInfo;
+                    volumeInfo.Id = item.id;
+
+                    Book book = new Book()
+                    {
+                        Id = volumeInfo.Id,
+                        Title = volumeInfo.title,
+                        Authors = volumeInfo.authors ?? new List<string>(),
+                        Publisher = volumeInfo.publisher,
+                        DatePublished = volumeInfo.publishedDate,
+                        Description = volumeInfo.description,
+                        SaleInfo = volumeInfo.saleInfo,
+                        industryIdentifiers = volumeInfo.industryIdentifiers,
+                        imageLinks = volumeInfo.imageLinks,
+                    };
+                    books.Add(book);
+                }
+            }
         }
+    }
 
-		public async Task<List<CartItem>> GetCartItemsById(string id)
-		{
-			List<CartItem> cartItems = new List<CartItem>();
-			var apiUrl = $"https://example.com/api/cartItems?id={id}";
-			var response = await _httpClient.GetAsync(apiUrl);
-
-			if (response.IsSuccessStatusCode)
-			{
-				var json = await response.Content.ReadAsStringAsync();
-				cartItems = JsonConvert.DeserializeObject<List<CartItem>>(json);
-			}
-
-			return cartItems;
-		}
-
-	}
+    return books;
+     }
+    }
 }
