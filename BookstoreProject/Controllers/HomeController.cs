@@ -1,21 +1,27 @@
 ﻿using BookstoreProject.Models;
+using BookstoreProject.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using X.PagedList;
 
 namespace BookstoreProject.Controllers
 {
     public class HomeController : Controller
-    {
-        private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+    {
+        private readonly IBooksService _booksService;
+
+        public HomeController(IBooksService service)
         {
-            _logger = logger;
+            _booksService = service;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            List<Book> books = await _booksService.GetBooksFromGoogleBooksAPI();
+
+
+            return View(books);
         }
 
         public IActionResult Privacy()

@@ -1,10 +1,12 @@
 ﻿using BookstoreProject.Models;
 using BookstoreProject.Services.Contracts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 
 namespace BookstoreProject.Controllers
 {
+	[Authorize]
 	public class CartController : Controller
 	{
         private readonly ICartService _cartService;
@@ -14,13 +16,13 @@ namespace BookstoreProject.Controllers
             _cartService = cartService;
         }
 
-		public async Task<IActionResult> Index()
+		public IActionResult Index()
 		{
-            Cart cart = _cartService.ViewCart();
+			Cart cart = _cartService.ViewCart();
 			return View(cart);
 		}
 
-        public IActionResult AddToCart(string id)
+		public IActionResult AddToCart(string id)
         {
             _cartService.AddToCart(id);
             return RedirectToAction("Index");
