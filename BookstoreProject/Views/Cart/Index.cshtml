@@ -1,5 +1,5 @@
 ﻿
-<h1>Cart</h1>
+<h1>Favorites</h1>
 @if (Model.Items != null && Model.Items.Count > 0)
 {
 	<table class="table">
@@ -33,9 +33,9 @@
 			}
 		</tbody>
 	</table>
-	<a class="a-cleanup1" asp-controller="Cart" asp-action="ClearCart"><div class="btn btn-danger float-right mr-5"><i class="fa-solid fa-trash-can"></i>Empty Cart</div></a>
+	<a class="a-cleanup1" asp-controller="Cart" asp-action="ClearCart"><div class="btn btn-danger float-right mr-5"><i class="fa-solid fa-trash-can"></i>Empty</div></a>
 }
 else
 {
-	<h3 class="text-center">Cart is empty</h3>
+	<h3 class="text-center">Empty</h3>
 }
