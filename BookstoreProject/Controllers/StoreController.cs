@@ -22,17 +22,9 @@ namespace BookstoreProject.Controllers
             {
                 books = books.Where(b => b.Title.Contains(search) || b.Authors.Contains(search)).ToList();
             }
-
-            // Номер на текущата страница (подразбиране: 1)
-            int pageNumber = page ?? 1;
-
-            // Брой елементи на страница (в случая: 20)
-            int pageSize = 20;
-
-            // Създаване на пагиниран списък от книги
-            IPagedList<Book> pagedBooks = books.ToPagedList(pageNumber, pageSize);
-
-            // Предаване на пагинираните данни на изгледа
+            int pageNumber = page ?? 1;  
+            int pageSize = 20;            
+            IPagedList<Book> pagedBooks = books.ToPagedList(pageNumber, pageSize);     
             return View(pagedBooks);
         }
 
